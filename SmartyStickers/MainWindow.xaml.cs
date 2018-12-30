@@ -24,5 +24,31 @@ namespace SmartyStickers
         {
             InitializeComponent();
         }
+
+        private void RedButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            MainGrid.Background = Brushes.Red; 
+        }
+
+        private void YellowButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Background = Brushes.Yellow;
+        }
+
+        private void GreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Background = Brushes.Green;
+        }
+
+        private void BlueButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Background = Brushes.Blue;
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

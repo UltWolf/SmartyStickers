@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SmartyStickers"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="300">
-    <Grid>
+    <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="128*"></ColumnDefinition>
             <ColumnDefinition Width="19"></ColumnDefinition>
@@ -21,11 +21,11 @@
             <RowDefinition Height="173*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBox  Grid.RowSpan="7" Grid.ColumnSpan="2"/>
-        <Button Name="RedButton" Background="Red" Grid.Row="1" Grid.Column="1" Width="10" Height="13"/>
-        <Button Name="YellowButton" Background="Yellow" Grid.Row="2" Grid.Column="1" Width="10" Height="13"/>
-        <Button Name="GreenButton" Background="Green" Grid.Row="3" Grid.Column="1" Width="10" Height="13"/>
-        <Button Name="BlueButton" Background="Blue" Grid.Row="4" Grid.Column="1" Width="10" Height="13"/>
+        <TextBox   Name="Notes" Background="Transparent" Grid.RowSpan="7" Grid.ColumnSpan="2"/>
+        <Button Name="RedButton" Background="Red" Grid.Row="1" Grid.Column="1" Width="10" Height="13" RenderTransformOrigin="0.52,0.508" Click="RedButton_Click"/>
+        <Button Name="YellowButton" Background="Yellow" Grid.Row="2" Grid.Column="1" Width="10" Height="13" Click="YellowButton_Click"/>
+        <Button Name="GreenButton" Background="Green" Grid.Row="3" Grid.Column="1" Width="10" Height="13" Click="GreenButton_Click"  />
+        <Button Name="BlueButton" Background="Blue" Grid.Row="4" Grid.Column="1" Width="10" Height="13" Click="BlueButton_Click"/>
         <Button Name="SettingsButton" Background="BlanchedAlmond" Grid.Row="5" Grid.Column="1" Width="10" Height="13"/>
     </Grid>
 </Window>
