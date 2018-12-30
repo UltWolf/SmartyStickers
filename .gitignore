@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/SmartyStickers/v15/Server/sqlite3
+/.vs/SmartyStickers/v15
+/SmartyStickers/obj/Debug
+/SmartyStickers/Properties
