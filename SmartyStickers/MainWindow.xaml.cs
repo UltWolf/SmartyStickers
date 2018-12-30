@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,22 @@ namespace SmartyStickers
         public MainWindow()
         {
             InitializeComponent();
+            if (!Directory.Exists("Data"))
+            {
+                FirstLaunch();
+            }
+            using (FileStream fs = new FileStream("Data\\MainData.data", FileMode.Open))
+            {
+                byte[] byteArray = new byte[fs.Length];
+                fs.Read(byteArray, 0, byteArray.Length);
+                Notes.Text = new String(Encoding.UTF8.GetChars(byteArray));
+
+            }
+        }
+        private void FirstLaunch()
+        {
+            Directory.CreateDirectory("Data");
+         
         }
 
         private void RedButton_Click(object sender, RoutedEventArgs e)
@@ -49,6 +66,22 @@ namespace SmartyStickers
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void Notes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
+        }
+ 
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (FileStream fs = new FileStream("Data\\MainData.data", FileMode.Create))
+            {
+                byte[] byteArray = Encoding.UTF8.GetBytes(Notes.Text);
+                fs.Write(byteArray, 0, byteArray.Length);
+            }
+            MessageBox.Show("File have been saved");
         }
     }
 }
