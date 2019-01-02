@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartyStickers"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="300">
+        Title="MainWindow" Height="450" Width="300"
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+
     <Grid Name="MainGrid">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="128*"></ColumnDefinition>
             <ColumnDefinition Width="19"></ColumnDefinition>
@@ -21,8 +24,10 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="173*"></RowDefinition>
         </Grid.RowDefinitions>
-
-        <TextBox   Name="Notes" Background="Transparent" Grid.RowSpan="7" Grid.ColumnSpan="2" TextChanged="Notes_TextChanged"/>
+        <TextBox   Name="Notes" Background="Transparent" Grid.RowSpan="9" Grid.ColumnSpan="2"      />
+        <Button Width="30" Height="30" Name="CloseSticker" Content="X" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CloseSticker_Click"></Button>
+        <Button  Width="30" Height="30" Name="AddSticker" Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Click="AddSticker_Click"></Button>
+        
         <Button Name="RedButton" Background="Red" Grid.Row="1" Grid.Column="1" Width="10" Height="13" RenderTransformOrigin="0.52,0.508" Click="RedButton_Click"/>
         <Button Name="YellowButton" Background="Yellow" Grid.Row="2" Grid.Column="1" Width="10" Height="13" Click="YellowButton_Click"/>
         <Button Name="GreenButton" Background="Green" Grid.Row="3" Grid.Column="1" Width="10" Height="13" Click="GreenButton_Click"  />

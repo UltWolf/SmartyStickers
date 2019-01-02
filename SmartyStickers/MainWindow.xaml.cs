@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SmartyStickers.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,25 +23,39 @@ namespace SmartyStickers
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private string PathToStickerManager = "Data\\InfoStickers.data";
+        private Sticker sticker = new Sticker();
+        BinaryFormatter bf = new BinaryFormatter();
+        public MainWindow(uint IdSticker)
         {
             InitializeComponent();
-            if (!Directory.Exists("Data"))
-            {
-                FirstLaunch();
-            }
-            using (FileStream fs = new FileStream("Data\\MainData.data", FileMode.Open))
-            {
-                byte[] byteArray = new byte[fs.Length];
-                fs.Read(byteArray, 0, byteArray.Length);
-                Notes.Text = new String(Encoding.UTF8.GetChars(byteArray));
-
-            }
+            this.sticker =  new Sticker(IdSticker); 
         }
-        private void FirstLaunch()
+        private void WriteDataToSticker()
+        { 
+            if (File.Exists("Data//Stickers//" + sticker.IdSticker))
+            {
+                
+                using (FileStream fs = new FileStream("Data//Stickers//" + sticker.IdSticker, FileMode.Open))
+                {
+                    bf.Serialize(fs, sticker);
+                }
+            }
+            
+        }
+        public MainWindow( )
         {
-            Directory.CreateDirectory("Data");
-         
+            InitializeComponent(); 
+
+        }
+        private uint GetLastNumberArray()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream fs = new FileStream(PathToStickerManager, FileMode.Open))
+            {
+                var array =  (uint[])bf.Deserialize(fs);
+                return (uint)array[array.Length - 1];
+            }
         }
 
         private void RedButton_Click(object sender, RoutedEventArgs e)
@@ -68,20 +84,24 @@ namespace SmartyStickers
            
         }
 
-        private void Notes_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-        }
+         
  
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            using (FileStream fs = new FileStream("Data\\MainData.data", FileMode.Create))
-            {
-                byte[] byteArray = Encoding.UTF8.GetBytes(Notes.Text);
-                fs.Write(byteArray, 0, byteArray.Length);
-            }
+            WriteDataToSticker();
             MessageBox.Show("File have been saved");
+        }
+
+        private void AddSticker_Click(object sender, RoutedEventArgs e)
+        {
+            var windows = new MainWindow(GetLastNumberArray());
+            windows.Show();
+        }
+
+        private void CloseSticker_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
