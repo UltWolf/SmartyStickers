@@ -9,30 +9,31 @@
         AllowsTransparency="True" Background="Transparent" WindowStyle="None">
 
     <Grid Name="MainGrid">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="128*"></ColumnDefinition>
             <ColumnDefinition Width="19"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="109*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="86*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="173*"></RowDefinition>
+            <RowDefinition Height="143*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox   Name="Notes" Background="Transparent" Grid.RowSpan="9" Grid.ColumnSpan="2"      />
+        <TextBox   Name="Notes" Background="Transparent"  Grid.Row ="1" Grid.RowSpan="9" Grid.ColumnSpan="2" Margin="0,0,0,-0.4" TextAlignment="Center" VerticalContentAlignment="Center"    />
         <Button Width="30" Height="30" Name="CloseSticker" Content="X" VerticalAlignment="Top" HorizontalAlignment="Left" Click="CloseSticker_Click"></Button>
         <Button  Width="30" Height="30" Name="AddSticker" Content="+" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Click="AddSticker_Click"></Button>
-        
-        <Button Name="RedButton" Background="Red" Grid.Row="1" Grid.Column="1" Width="10" Height="13" RenderTransformOrigin="0.52,0.508" Click="RedButton_Click"/>
-        <Button Name="YellowButton" Background="Yellow" Grid.Row="2" Grid.Column="1" Width="10" Height="13" Click="YellowButton_Click"/>
-        <Button Name="GreenButton" Background="Green" Grid.Row="3" Grid.Column="1" Width="10" Height="13" Click="GreenButton_Click"  />
-        <Button Name="BlueButton" Background="Blue" Grid.Row="4" Grid.Column="1" Width="10" Height="13" Click="BlueButton_Click"/>
-        <Button Name="SaveButton" Background="SeaShell" Grid.Row="6" Grid.Column="1" Width="10" Height="13" Click="SaveButton_Click"/>
-        <Button Name="SettingsButton" Background="BlanchedAlmond" Grid.Row="5" Grid.Column="1" Width="10" Height="13" Click="SettingsButton_Click"/>
+
+        <Button Name="RedButton" Background="Red" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.52,0.508" Click="RedButton_Click" Margin="4.2,45.6,5,38.8"/>
+        <Button Name="YellowButton" Background="Yellow" Grid.Row="2" Grid.Column="1" Click="YellowButton_Click" Margin="4.2,11.2,5,6.2"/>
+        <Button Name="GreenButton" Background="Green" Grid.Row="3" Grid.Column="1" Click="GreenButton_Click" Margin="4.2,9.8,5,7.6"  />
+        <Button Name="BlueButton" Background="Blue" Grid.Row="4" Grid.Column="1" Click="BlueButton_Click" Margin="4.2,8.4,5,9"/>
+        <Button Name="SaveButton" Background="SeaShell" Grid.Row="6" Grid.Column="1" Click="SaveButton_Click" Margin="4.2,8.6,5,9.8"/>
+        <Button Name="SettingsButton" Background="BlanchedAlmond" Grid.Row="5" Grid.Column="1" Click="SettingsButton_Click" Margin="4.2,8,5,9.4"/>
     </Grid>
 </Window>

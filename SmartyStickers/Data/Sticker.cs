@@ -9,14 +9,22 @@ namespace SmartyStickers.Data
         public Sticker (uint IdSticker)
         {
             this.IdSticker = IdSticker;
-            this.Color = Brushes.White;
         }
         public Sticker()
         {
 
-        } 
+        }
+        public void SetColor(byte R,byte G, byte B)
+        {
+            this.R = R;
+            this.G = G;
+            this.B = B; 
+        }
+        public byte R =255;
+        public byte G =255;
+        public byte B = 255;
+        
         public uint IdSticker; 
-        public string Text; 
-        public SolidColorBrush Color = new SolidColorBrush(Colors.Wheat );
+        public string Text;  
     }
 }

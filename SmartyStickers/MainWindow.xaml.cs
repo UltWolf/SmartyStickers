@@ -25,43 +25,61 @@ namespace SmartyStickers
     {
         private string PathToStickerManager = "Data\\InfoStickers.data";
         private Sticker sticker = new Sticker();
+        private string PathToSticker;
+        
         BinaryFormatter bf = new BinaryFormatter();
         public MainWindow(uint IdSticker)
         {
             InitializeComponent();
-            this.sticker =  new Sticker(IdSticker); 
+            this.sticker =  new Sticker(IdSticker);
+            this.PathToSticker = "Data//Stickers//" + sticker.IdSticker + ".data";
+            RecoveryWindow();
+         
         }
         private void WriteDataToSticker()
-        { 
-            if (File.Exists("Data//Stickers//" + sticker.IdSticker))
+        {
+            sticker.Text = Notes.Text;
+            if (File.Exists(this.PathToSticker))
             {
                 
-                using (FileStream fs = new FileStream("Data//Stickers//" + sticker.IdSticker, FileMode.Open))
+                using (FileStream fs = new FileStream(this.PathToSticker, FileMode.Create))
                 {
                     bf.Serialize(fs, sticker);
                 }
             }
-            
         }
         public MainWindow( )
         {
             InitializeComponent(); 
 
         }
+        private  void RecoveryWindow()
+        {
+            if (File.Exists(this.PathToSticker)) {
+                using (FileStream fs = new FileStream(this.PathToSticker,FileMode.Open))
+                {
+                    this.sticker = (Sticker)bf.Deserialize(fs);
+                }
+            }
+             MainGrid.Background = new SolidColorBrush(Color.FromRgb(sticker.R, sticker.G, sticker.B));
+             Notes.Text = sticker.Text;
+        }
         private uint GetLastNumberArray()
         {
             BinaryFormatter bf = new BinaryFormatter();
             using (FileStream fs = new FileStream(PathToStickerManager, FileMode.Open))
             {
-                var array =  (uint[])bf.Deserialize(fs);
-                return (uint)array[array.Length - 1];
+                var array =  (List<uint>)bf.Deserialize(fs);
+                return (uint)array[array.Count - 1];
             }
+
         }
 
         private void RedButton_Click(object sender, RoutedEventArgs e)
         {
             
-            MainGrid.Background = Brushes.Red; 
+            MainGrid.Background = Brushes.Red;
+            this.sticker.SetColor(255, 0, 0);
         }
 
         private void YellowButton_Click(object sender, RoutedEventArgs e)
@@ -95,12 +113,25 @@ namespace SmartyStickers
 
         private void AddSticker_Click(object sender, RoutedEventArgs e)
         {
-            var windows = new MainWindow(GetLastNumberArray());
-            windows.Show();
+            var lastId = GetLastNumberArray() + 1;
+            var windows = new MainWindow(lastId);
+            List<uint> ids = new List<uint>();
+            using (FileStream fs = new FileStream(PathToStickerManager, FileMode.Open))
+            {
+               ids = (List<uint>)bf.Deserialize(fs);
+            }
+            ids.Add(lastId);
+                    using (FileStream fs = new FileStream(this.PathToStickerManager, FileMode.Create))
+                    {
+                        bf.Serialize(fs, ids);
+                    } 
+           
+                    windows.Show();
         }
 
         private void CloseSticker_Click(object sender, RoutedEventArgs e)
         {
+            WriteDataToSticker();
             this.Close();
         }
     }

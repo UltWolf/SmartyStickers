@@ -34,8 +34,8 @@ namespace SmartyStickers
             {
                 try
                 {
-                    uint[] ids = (uint[])formatter.Deserialize(fs);
-                    if (ids.Length > 0)
+                    List<uint> ids = (List<uint>)formatter.Deserialize(fs);
+                    if (ids.Count > 0)
                     {
                         LoadStickers(ids);
                     }
@@ -44,9 +44,8 @@ namespace SmartyStickers
                 catch(SerializationException)
                 {
                     LoadSticker(1);
-                    var stickerList = new List<Sticker>();
-                    stickerList.Add(new Sticker(1));
-                   formatter.Serialize(fs,stickerList);
+                    List<uint> ids = new List<uint>(){ 1 };
+                   formatter.Serialize(fs,ids);
                 }
             }
             this.Close();
@@ -60,7 +59,7 @@ namespace SmartyStickers
             Directory.CreateDirectory("Data\\Stickers");
         }
 
-        private void LoadStickers(uint[] stickers)
+        private void LoadStickers(List<uint> stickers)
         {
             foreach(var sticker in stickers)
             {
